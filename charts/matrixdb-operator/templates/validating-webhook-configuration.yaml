@@ -1,0 +1,29 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "matrixdb-operator.fullname" . }}-validating-webhook-configuration
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "matrixdb-operator.fullname" . }}-serving-cert
+  labels:
+  {{- include "matrixdb-operator.labels" . | nindent 4 }}
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: '{{ include "matrixdb-operator.fullname" . }}-webhook-service'
+      namespace: '{{ .Release.Namespace }}'
+      path: /validate-deploy-ymatrix-cn-v1-matrixdbcluster
+  failurePolicy: Fail
+  name: vmatrixdbcluster.kb.io
+  rules:
+  - apiGroups:
+    - deploy.ymatrix.cn
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - matrixdbclusters
+  sideEffects: None

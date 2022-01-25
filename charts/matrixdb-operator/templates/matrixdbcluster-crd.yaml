@@ -1,0 +1,176 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: matrixdbclusters.deploy.ymatrix.cn
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.4.1
+  labels:
+  {{- include "matrixdb-operator.labels" . | nindent 4 }}
+spec:
+  conversion:
+    strategy: Webhook
+    webhook:
+      clientConfig:
+        service:
+          name: '{{ include "matrixdb-operator.fullname" . }}-webhook-service'
+          namespace: '{{ .Release.Namespace }}'
+          path: /convert
+      conversionReviewVersions:
+      - v1
+  group: deploy.ymatrix.cn
+  names:
+    categories:
+    - all
+    kind: MatrixDBCluster
+    listKind: MatrixDBClusterList
+    plural: matrixdbclusters
+    singular: matrixdbcluster
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: The state of the MatrixDB cluster
+      jsonPath: .status.state
+      name: State
+      type: string
+    - description: The age of the MatrixDB cluster
+      jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: MatrixDBCluster is the Schema for the matrixdbclusters API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: MatrixDBClusterSpec defines the desired state of MatrixDBCluster
+            properties:
+              image:
+                properties:
+                  repository:
+                    description: Repository is the image repo. e.g. matrixdb/matrixdb-k8s
+                    type: string
+                  tag:
+                    description: Tag is the image tag. e.g. v0.1.0
+                    type: string
+                required:
+                - repository
+                - tag
+                type: object
+              master:
+                description: Master defines the master state
+                properties:
+                  cpu:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  hbaEntry:
+                    type: string
+                  memory:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  storage:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  storageClassName:
+                    minLength: 1
+                    type: string
+                  workerSelector:
+                    additionalProperties:
+                      type: string
+                    description: WorkerSelector defines the labels used to match worker
+                      nodes when scheduling
+                    type: object
+                required:
+                - cpu
+                - memory
+                - storage
+                - storageClassName
+                type: object
+              segments:
+                description: Segments defines the segments state
+                properties:
+                  count:
+                    description: Count defines the number of segments
+                    format: int32
+                    maximum: 200
+                    minimum: 1
+                    type: integer
+                  cpu:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  memory:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  storage:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  storageClassName:
+                    minLength: 1
+                    type: string
+                  workerSelector:
+                    additionalProperties:
+                      type: string
+                    description: WorkerSelector defines the labels used to match worker
+                      nodes when scheduling
+                    type: object
+                required:
+                - count
+                - cpu
+                - memory
+                - storage
+                - storageClassName
+                type: object
+            required:
+            - image
+            - master
+            - segments
+            type: object
+          status:
+            description: MatrixDBClusterStatus defines the observed state of MatrixDBCluster
+            properties:
+              state:
+                description: State is the current state of the MatrixDB cluster
+                type: string
+            required:
+            - state
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
