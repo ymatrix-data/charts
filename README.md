@@ -1,6 +1,6 @@
-# yMatrix helm charts repository
+# charts
 
-Helm charts for yMatrix Inc.
+Helm chart repository of yMatrix Inc.
 ## Usage
 
 [Helm](https://helm.sh) must be installed to use the charts.  Please refer to
