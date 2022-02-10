@@ -77,7 +77,13 @@ spec:
                     - type: string
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
+                  enableStandby:
+                    description: EnableStandby determines whether to setup standby for
+                      master.
+                    type: boolean
                   hbaEntry:
+                    description: HbaEntry are entries that will be added to master's
+                      pg_hba.conf
                     type: string
                   memory:
                     anyOf:
@@ -102,6 +108,7 @@ spec:
                     type: object
                 required:
                 - cpu
+                - enableStandby
                 - memory
                 - storage
                 - storageClassName
@@ -121,6 +128,10 @@ spec:
                     - type: string
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
+                  enableMirror:
+                    description: EnableMirror determines whether to setup mirror for
+                      primary segments.
+                    type: boolean
                   memory:
                     anyOf:
                     - type: integer
@@ -145,6 +156,7 @@ spec:
                 required:
                 - count
                 - cpu
+                - enableMirror
                 - memory
                 - storage
                 - storageClassName
