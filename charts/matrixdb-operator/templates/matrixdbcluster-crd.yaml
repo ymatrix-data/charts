@@ -24,6 +24,8 @@ spec:
     kind: MatrixDBCluster
     listKind: MatrixDBClusterList
     plural: matrixdbclusters
+    shortNames:
+    - mxdb
     singular: matrixdbcluster
   scope: Namespaced
   versions:
