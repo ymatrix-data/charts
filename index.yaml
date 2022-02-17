@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   matrixdb-operator:
   - apiVersion: v2
+    appVersion: 0.3.1
+    created: "2022-02-17T03:29:03.751859106Z"
+    description: A Helm chart for matrixdb-operator to run MatrixDB on Kubernetes
+    digest: 3cd91f2b0ef52f9a3c248155ad22c4be60fd19dd534098d927373247fb34ed10
+    name: matrixdb-operator
+    type: application
+    urls:
+    - https://github.com/ymatrix-data/charts/releases/download/matrixdb-operator-0.3.1/matrixdb-operator-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2022-02-10T07:24:34.283212471Z"
     description: A Helm chart for matrixdb-operator to run MatrixDB on Kubernetes
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/ymatrix-data/charts/releases/download/matrixdb-operator-0.2.0/matrixdb-operator-0.2.0.tgz
     version: 0.2.0
-generated: "2022-02-10T07:24:34.283225471Z"
+generated: "2022-02-17T03:29:03.751889106Z"
