@@ -24,7 +24,6 @@ webhooks:
     operations:
     - CREATE
     - UPDATE
-    - DELETE
     resources:
     - matrixdbclusters
   sideEffects: None

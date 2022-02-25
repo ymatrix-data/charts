@@ -58,7 +58,35 @@ spec:
           spec:
             description: MatrixDBClusterSpec defines the desired state of MatrixDBCluster
             properties:
+              cylinder:
+                description: Cylinder defines cylinder component
+                properties:
+                  cpu:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: CPU defines the limit of CPU resource
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  memory:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: Memory defines the limit of memory resource
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  workerSelector:
+                    additionalProperties:
+                      type: string
+                    description: WorkerSelector defines the labels used to match worker
+                      nodes when scheduling
+                    type: object
+                required:
+                - cpu
+                - memory
+                type: object
               image:
+                description: Image defines DB container image to deploy.
                 properties:
                   repository:
                     description: Repository is the image repo. e.g. matrixdb/matrixdb-k8s
@@ -77,29 +105,30 @@ spec:
                     anyOf:
                     - type: integer
                     - type: string
+                    description: CPU defines the limit of CPU resource
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                   enableStandby:
                     description: EnableStandby determines whether to setup standby for
                       master.
                     type: boolean
-                  hbaEntry:
-                    description: HbaEntry are entries that will be added to master's
-                      pg_hba.conf
-                    type: string
                   memory:
                     anyOf:
                     - type: integer
                     - type: string
+                    description: Memory defines the limit of memory resource
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                   storage:
                     anyOf:
                     - type: integer
                     - type: string
+                    description: Storage defines the size of storage to request
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                   storageClassName:
+                    description: StorageClassName defines the storage class to use to
+                      apply for storage
                     minLength: 1
                     type: string
                   workerSelector:
@@ -128,6 +157,7 @@ spec:
                     anyOf:
                     - type: integer
                     - type: string
+                    description: CPU defines the limit of CPU resource
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                   enableMirror:
@@ -138,15 +168,19 @@ spec:
                     anyOf:
                     - type: integer
                     - type: string
+                    description: Memory defines the limit of memory resource
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                   storage:
                     anyOf:
                     - type: integer
                     - type: string
+                    description: Storage defines the size of storage to request
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                   storageClassName:
+                    description: StorageClassName defines the storage class to use to
+                      apply for storage
                     minLength: 1
                     type: string
                   workerSelector:
@@ -162,6 +196,33 @@ spec:
                 - memory
                 - storage
                 - storageClassName
+                type: object
+              ui:
+                description: UI defines the UI component
+                properties:
+                  cpu:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: CPU defines the limit of CPU resource
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  memory:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: Memory defines the limit of memory resource
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  workerSelector:
+                    additionalProperties:
+                      type: string
+                    description: WorkerSelector defines the labels used to match worker
+                      nodes when scheduling
+                    type: object
+                required:
+                - cpu
+                - memory
                 type: object
             required:
             - image
