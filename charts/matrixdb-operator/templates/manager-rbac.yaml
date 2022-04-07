@@ -94,6 +94,18 @@ rules:
   verbs:
   - '*'
 - apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  verbs:
+  - '*'
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - issuers
+  verbs:
+  - '*'
+- apiGroups:
   - deploy.ymatrix.cn
   resources:
   - matrixdbclusters
