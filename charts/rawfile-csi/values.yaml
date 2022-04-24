@@ -1,0 +1,28 @@
+provisionerName: "rawfile.csi.ymatrix.cn"
+
+defaults: &defaults
+  image:
+    repository: matrixdb/rawfile-csi
+    tag: v0.1.0
+    pullPolicy: Always
+  resources:
+    limits:
+      cpu: 1
+      memory: 100Mi
+    requests:
+      cpu: 10m
+      memory: 100Mi
+
+controller:
+  <<: *defaults
+
+node:
+  <<: *defaults
+  csiMetadataDir: /etc/csi
+  metrics:
+    enabled: false
+
+imagePullSecrets: []
+serviceMonitor:
+  enabled: false
+  interval: 1m
