@@ -121,4 +121,15 @@ entries:
     urls:
     - https://github.com/ymatrix-data/charts/releases/download/matrixdb-operator-0.2.0/matrixdb-operator-0.2.0.tgz
     version: 0.2.0
-generated: "2022-04-15T01:24:50.502897001Z"
+  rawfile-csi:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-04-24T11:09:17.513436686Z"
+    description: RawFile Driver Container Storage Interface
+    digest: f08ea1fca4c34152e41a1ccaa28e37aefb52910a635780b79bb7ad91d08ec7d5
+    name: rawfile-csi
+    type: application
+    urls:
+    - https://github.com/ymatrix-data/charts/releases/download/rawfile-csi-0.1.0/rawfile-csi-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-04-24T11:09:17.513473487Z"
