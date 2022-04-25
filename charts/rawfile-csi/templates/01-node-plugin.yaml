@@ -97,7 +97,7 @@ spec:
           resources:
             {{- toYaml .Values.node.resources | nindent 12 }}
         - name: node-driver-registrar
-          image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
+          image: matrixdb/sig-storage_csi-node-driver-registrar:v2.2.0
           imagePullPolicy: IfNotPresent
           args:
             - --csi-address=$(ADDRESS)
