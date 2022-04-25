@@ -123,6 +123,16 @@ entries:
     version: 0.2.0
   rawfile-csi:
   - apiVersion: v2
+    appVersion: 0.1.1
+    created: "2022-04-25T01:20:39.617469014Z"
+    description: RawFile Driver Container Storage Interface
+    digest: dc1210931a761bd94b6b15b62348e2781a137ce8148b89414e890c6df406eae0
+    name: rawfile-csi
+    type: application
+    urls:
+    - https://github.com/ymatrix-data/charts/releases/download/rawfile-csi-0.1.1/rawfile-csi-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2022-04-24T11:09:17.513436686Z"
     description: RawFile Driver Container Storage Interface
@@ -132,4 +142,4 @@ entries:
     urls:
     - https://github.com/ymatrix-data/charts/releases/download/rawfile-csi-0.1.0/rawfile-csi-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-24T11:09:17.513473487Z"
+generated: "2022-04-25T01:20:39.617628525Z"
