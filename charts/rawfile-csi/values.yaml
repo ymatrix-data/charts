@@ -3,7 +3,7 @@ provisionerName: "rawfile.csi.ymatrix.cn"
 defaults: &defaults
   image:
     repository: matrixdb/rawfile-csi
-    tag: v0.1.0
+    tag: v0.1.1
     pullPolicy: Always
   resources:
     limits:
@@ -18,7 +18,7 @@ controller:
 
 node:
   <<: *defaults
-  csiMetadataDir: /etc/csi
+  csiMetadataDir: /etc/rawfile-csi
   metrics:
     enabled: false
 

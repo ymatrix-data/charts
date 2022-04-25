@@ -39,8 +39,8 @@ spec:
       volumes:
         - name: csi-metadata-dir
           hostPath:
-            path: "{{.Values.node.csiMetadataDir}}"
-            type: Directory
+            path: {{ .Values.node.csiMetadataDir }}
+            type: DirectoryOrCreate
         - name: registration-dir
           hostPath:
             path: /var/lib/kubelet/plugins_registry
@@ -65,14 +65,14 @@ spec:
             privileged: true
           env:
             - name: PROVISIONER_NAME
-              value: "{{ .Values.provisionerName }}"
+              value: {{ .Values.provisionerName }}
             - name: CSI_ENDPOINT
               value: unix:///csi/csi.sock
             - name: IMAGE_REPOSITORY
-              value: "{{ .Values.node.image.repository }}"
+              value: {{ .Values.node.image.repository }}
           {{- if regexMatch "^.*-ci$" .Values.node.image.tag }}
             - name: IMAGE_TAG
-              value: "{{ .Values.node.image.tag }}"
+              value: {{ .Values.node.image.tag }}
           {{- end }}
             - name: NODE_ID
               valueFrom:
