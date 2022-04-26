@@ -84,6 +84,14 @@ spec:
               containerPort: 9100
             - name: csi-probe
               containerPort: 9808
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /healthz
+              port: csi-probe
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: csi-metadata-dir
               mountPath: /etc/csi
@@ -156,6 +164,14 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: liveness-probe
+          imagePullPolicy: Always
+          image: matrixdb/sig-storage_livenessprobe:v2.3.0
+          args:
+            - --csi-address=/csi/csi.sock
           volumeMounts:
             - name: socket-dir
               mountPath: /csi
