@@ -3,8 +3,8 @@ provisionerName: "rawfile.csi.ymatrix.cn"
 defaults: &defaults
   image:
     repository: matrixdb/rawfile-csi
-    tag: v0.2.0
-    pullPolicy: Always
+    tag: v0.2.1
+    pullPolicy: IfNotPresent
   resources:
     limits:
       cpu: 1

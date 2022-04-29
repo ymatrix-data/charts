@@ -168,7 +168,7 @@ spec:
             - name: socket-dir
               mountPath: /csi
         - name: liveness-probe
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           image: matrixdb/sig-storage_livenessprobe:v2.3.0
           args:
             - --csi-address=/csi/csi.sock

@@ -75,7 +75,7 @@ spec:
           resources:
             {{- toYaml .Values.controller.resources | nindent 12 }}
         - name: liveness-probe
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           image: matrixdb/sig-storage_livenessprobe:v2.3.0
           args:
             - --csi-address=/csi/csi.sock

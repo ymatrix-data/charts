@@ -1,0 +1,19 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+After this release if fully deployed, a StorageClass can be applied like the following:
+
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: <storage class name>
+provisioner: rawfile.csi.ymatrix.cn
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  dataPaths: "<path 1>:<path 2>:<path 3>"
+  allocatePolicy: <sequential / roundrobin / random>
+  fsType: <ext4 / xfs / btrfs>
+allowVolumeExpansion: false

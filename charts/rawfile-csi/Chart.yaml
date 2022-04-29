@@ -1,6 +1,8 @@
 apiVersion: v2
 name: rawfile-csi
-description: RawFile Driver Container Storage Interface
+description: CSI driver for local PV backed by raw image file.
 type: application
-version: &v 0.2.0
+version: &v 0.2.1
 appVersion: *v
+annotations:
+  artifacthub.io/license: Apache-2.0
