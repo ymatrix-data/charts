@@ -1,5 +1,7 @@
 # charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/ymatrix)](https://artifacthub.io/packages/search?repo=ymatrix)
+
 Helm chart repository of yMatrix Inc.
 ## Usage
 
