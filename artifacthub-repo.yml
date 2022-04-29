@@ -1,0 +1,4 @@
+repositoryID: 084efdb4-2bb9-4418-b061-cf5cb0ecab9a # The ID of the Artifact Hub repository where the packages will be published to (optional, but it enables verified publisher)
+owners: # (optional, used to claim repository ownership)
+  - name: yxd-ym
+    email: yangxudong@ymatrix.cn
