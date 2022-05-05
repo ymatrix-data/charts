@@ -1,12 +1,12 @@
 controllerManager:
   kubeRbacProxy:
     image:
-      repository: katanomi/kubebuilder-kube-rbac-proxy
-      tag: v0.8.0
+      repository: matrixdb/kubebuilder_kube-rbac-proxy
+      tag: v0.11.0
   manager:
     image:
       repository: matrixdb/matrixdb-operator
-      tag: v0.7.0
+      tag: v0.8.0
     resources:
       limits:
         cpu: 500m

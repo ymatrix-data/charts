@@ -13,7 +13,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: &v 0.7.0
+version: &v 0.8.0
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
@@ -23,3 +23,52 @@ appVersion: *v
 home: https://ymatrix.cn/
 # This the icon of yMatrix Inc.
 icon: https://ymatrix.cn/img/index/logo_blue.svg
+
+annotations:
+  artifacthub.io/links: |
+    - name: document
+      url: https://ymatrix.cn/doc/latest/install/kubernetes
+    - name: crd-full
+      url: https://ymatrix.cn/doc/latest/install/kubernetes_crd
+  artifacthub.io/operator: "true"
+  artifacthub.io/operatorCapabilities: Basic Install
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/crds: |
+    - kind: MatrixDBCluster
+      version: v1
+      name: matrixdbcluster
+      description: A MatrixDB cluster that is deployed by matrixdb-operator.
+  artifacthub.io/crdsExamples: |
+    - apiVersion: deploy.ymatrix.cn/v1
+      kind: MatrixDBCluster
+      metadata:
+        name: db0
+      spec:
+        image:
+          repository: matrixdb/matrixdb-community
+          tag: v4.5.0.community-v0.8.0 # DB image tag
+        master:
+          enableStandby: true
+          memory: 500Mi
+          cpu: "0.5"
+          storageClassName: gp2 # on EKS
+          storage: 1Gi
+          workerSelector: {}
+        segments:
+          count: 1
+          enableMirror: true
+          memory: 500Mi
+          cpu: "0.5"
+          storageClassName: gp2 # on EKS
+          storage: 1Gi
+          workerSelector: {}
+        gate:
+          memory: 100Mi
+          cpu: "0.1"
+          storageClassName: gp2 # on EKS
+          storage: 1Gi
+          workerSelector: {}
+  artifacthub.io/recommendations: |
+    - url: https://artifacthub.io/packages/helm/cert-manager/cert-manager
+    - url: https://artifacthub.io/packages/helm/openebs/openebs
+    - url: https://artifacthub.io/packages/helm/ymatrix/rawfile-csi
