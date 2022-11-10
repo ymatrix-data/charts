@@ -50,6 +50,66 @@ entries:
         - url: https://artifacthub.io/packages/helm/openebs/openebs
         - url: https://artifacthub.io/packages/helm/ymatrix/rawfile-csi
     apiVersion: v2
+    appVersion: 0.11.1
+    created: "2022-11-10T10:41:24.061961626Z"
+    description: A Helm chart for matrixdb-operator to run MatrixDB on Kubernetes
+    digest: 406d944d3ad702d9c42881fb99a0ff3441f8f7526bba2769312ecbe2e9ac9622
+    home: https://ymatrix.cn/
+    icon: https://ymatrix.cn/img/index/logo_blue.svg
+    name: matrixdb-operator
+    type: application
+    urls:
+    - https://github.com/ymatrix-data/charts/releases/download/matrixdb-operator-0.11.1/matrixdb-operator-0.11.1.tgz
+    version: 0.11.1
+  - annotations:
+      artifacthub.io/crds: |
+        - kind: MatrixDBCluster
+          version: v1
+          name: matrixdbcluster
+          description: A MatrixDB cluster that is deployed by matrixdb-operator.
+      artifacthub.io/crdsExamples: |
+        - apiVersion: deploy.ymatrix.cn/v1
+          kind: MatrixDBCluster
+          metadata:
+            name: db0
+          spec:
+            image:
+              repository: matrixdb/matrixdb-community
+              tag: v4.5.0.community-v0.8.0 # DB image tag
+            master:
+              enableStandby: true
+              memory: 500Mi
+              cpu: "0.5"
+              storageClassName: gp2 # on EKS
+              storage: 1Gi
+              workerSelector: {}
+            segments:
+              count: 1
+              enableMirror: true
+              memory: 500Mi
+              cpu: "0.5"
+              storageClassName: gp2 # on EKS
+              storage: 1Gi
+              workerSelector: {}
+            gate:
+              memory: 100Mi
+              cpu: "0.1"
+              storageClassName: gp2 # on EKS
+              storage: 1Gi
+              workerSelector: {}
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: document
+          url: https://ymatrix.cn/doc/latest/install/kubernetes
+        - name: crd-full
+          url: https://ymatrix.cn/doc/latest/install/kubernetes_crd
+      artifacthub.io/operator: "true"
+      artifacthub.io/operatorCapabilities: Basic Install
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/cert-manager/cert-manager
+        - url: https://artifacthub.io/packages/helm/openebs/openebs
+        - url: https://artifacthub.io/packages/helm/ymatrix/rawfile-csi
+    apiVersion: v2
     appVersion: 0.11.0
     created: "2022-11-08T09:57:42.419389985Z"
     description: A Helm chart for matrixdb-operator to run MatrixDB on Kubernetes
@@ -446,4 +506,4 @@ entries:
     urls:
     - https://github.com/ymatrix-data/charts/releases/download/rawfile-csi-0.1.0/rawfile-csi-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-08T09:57:42.419633386Z"
+generated: "2022-11-10T10:41:24.062113829Z"
