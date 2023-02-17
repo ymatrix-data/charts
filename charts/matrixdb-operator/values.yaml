@@ -6,7 +6,7 @@ controllerManager:
   manager:
     image:
       repository: matrixdb/matrixdb-operator
-      tag: v0.11.1
+      tag: v0.11.2
     resources:
       limits:
         cpu: 500m
