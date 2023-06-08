@@ -23,6 +23,68 @@ entries:
               storageClassName: gp2 # on EKS
               storage: 1Gi
               workerSelector: {}
+              shmsize: 100Mi
+            segments:
+              count: 1
+              enableMirror: true
+              memory: 500Mi
+              cpu: "0.5"
+              storageClassName: gp2 # on EKS
+              storage: 1Gi
+              workerSelector: {}
+              shmsize: 100Mi
+            gate:
+              memory: 100Mi
+              cpu: "0.1"
+              storageClassName: gp2 # on EKS
+              storage: 1Gi
+              workerSelector: {}
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: document
+          url: https://ymatrix.cn/doc/latest/install/kubernetes
+        - name: crd-full
+          url: https://ymatrix.cn/doc/latest/install/kubernetes_crd
+      artifacthub.io/operator: "true"
+      artifacthub.io/operatorCapabilities: Basic Install
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/cert-manager/cert-manager
+        - url: https://artifacthub.io/packages/helm/openebs/openebs
+        - url: https://artifacthub.io/packages/helm/ymatrix/rawfile-csi
+    apiVersion: v2
+    appVersion: 0.13.0
+    created: "2023-06-08T06:25:40.096176134Z"
+    description: A Helm chart for matrixdb-operator to run MatrixDB on Kubernetes
+    digest: f84d9b85ddc5e033a306d6c13a39d1af5ffdfc2809391274e78b9888873afc4e
+    home: https://ymatrix.cn/
+    icon: https://ymatrix.cn/img/index/logo_blue.svg
+    name: matrixdb-operator
+    type: application
+    urls:
+    - https://github.com/ymatrix-data/charts/releases/download/matrixdb-operator-0.13.0/matrixdb-operator-0.13.0.tgz
+    version: 0.13.0
+  - annotations:
+      artifacthub.io/crds: |
+        - kind: MatrixDBCluster
+          version: v1
+          name: matrixdbcluster
+          description: A MatrixDB cluster that is deployed by matrixdb-operator.
+      artifacthub.io/crdsExamples: |
+        - apiVersion: deploy.ymatrix.cn/v1
+          kind: MatrixDBCluster
+          metadata:
+            name: db0
+          spec:
+            image:
+              repository: matrixdb/matrixdb-community
+              tag: v4.5.0.community-v0.8.0 # DB image tag
+            master:
+              enableStandby: true
+              memory: 500Mi
+              cpu: "0.5"
+              storageClassName: gp2 # on EKS
+              storage: 1Gi
+              workerSelector: {}
             segments:
               count: 1
               enableMirror: true
@@ -806,4 +868,4 @@ entries:
     urls:
     - https://github.com/ymatrix-data/charts/releases/download/rawfile-csi-0.1.0/rawfile-csi-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-23T07:28:01.820323048Z"
+generated: "2023-06-08T06:25:40.097808742Z"
