@@ -161,6 +161,13 @@ spec:
                     description: Memory defines the limit of memory resource
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
+                  shmSize:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: Size of shared memory
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
                   storage:
                     anyOf:
                     - type: integer
@@ -183,6 +190,7 @@ spec:
                 - cpu
                 - enableStandby
                 - memory
+                - shmSize
                 - storage
                 - storageClassName
                 type: object
@@ -213,6 +221,13 @@ spec:
                     description: Memory defines the limit of memory resource
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
+                  shmSize:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: Size of shared memory
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
                   storage:
                     anyOf:
                     - type: integer
@@ -236,6 +251,7 @@ spec:
                 - cpu
                 - enableMirror
                 - memory
+                - shmSize
                 - storage
                 - storageClassName
                 type: object
